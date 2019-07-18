@@ -15,7 +15,7 @@ class FileDB {
             $encoded_string = file_get_contents($this->file_name);
 
             if ($encoded_string !== false) {
-                return json_decode($encoded_string, true);
+                $this->data = json_decode($encoded_string, true);
             }
         }
     }
@@ -29,4 +29,13 @@ class FileDB {
         }
     }
 
+    public function save($array) {
+        $this->data = $array;
+        file_put_contents($file_name, json_encode($array));
+    }
+
 }
+
+
+
+
