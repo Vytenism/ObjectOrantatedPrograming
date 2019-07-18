@@ -29,10 +29,7 @@ class ThailandSurprise {
 }
 
 $name = new ThailandSurprise('miniskirt');
-$name->attachBalls();
 
-//print $name->clothes;
-var_dump($name);
 ?>
 <html>
     <head>
