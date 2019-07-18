@@ -22,7 +22,8 @@ class FileDB {
 
     public function getData() {
         if ($this->data == null) {
-            return load();
+            $this->load();
+            return $this->data;
         } else {
             return $this->data;
         }
