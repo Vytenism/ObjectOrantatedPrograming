@@ -1,27 +1,27 @@
 <?php
+
 class FileDB {
+
     private $file_name;
     private $data;
+
     public function __construct($file_name, $data) {
         $this->file_name = $file_name;
         $this->data = $data;
     }
-    public function getData(){
-        $this->data = file_get_contents($file_name);
+    
+    public function load() {
+        if ($data) {
+            $this->data = json_decode(file_get_contents($this->file_name), true);
+        }
     }
-    public function setData(){
-        $this->data = file_put_contents($file_name);
+
+    public function save($array) {
+        if (!$data) {
+            $this->data = file_put_contents($file_name, json_encode($array));
+        }
     }
-    public function load(){
-        $this->data = json_decode($data);
-    }
-    public function save(){
-        $this->data = json_encode($data);
-    }
+
 }
-
-
-
-
 
 
