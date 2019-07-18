@@ -35,7 +35,7 @@ class FileDB {
 
     public function save($array) {
         $this->data = $array;
-        file_put_contents($this->file_name, json_encode($this->data));
+        $this->data = file_put_contents($this->file_name, json_encode($this->data));
     }
 
 }
