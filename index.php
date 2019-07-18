@@ -29,13 +29,13 @@ class FileDB {
         }
     }
 
+    public function setData($data_array) {
+        $this->data = $data_array;
+    }
+
     public function save($array) {
         $this->data = $array;
-        file_put_contents($file_name, json_encode($array));
+        file_put_contents($this->file_name, json_encode($this->data));
     }
 
 }
-
-
-
-
