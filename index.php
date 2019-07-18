@@ -4,9 +4,11 @@ class ThailandSurprise {
 
     public $clothes;
     private $balls;
+    private $name;
 
-    public function __construct($clothes) {
+    public function __construct($clothes, $name) {
         $this->clothes = $clothes;
+        $this->name = $name;
         $this->balls = rand(0, 1);
     }
 
@@ -20,15 +22,17 @@ class ThailandSurprise {
 
     public function getPhoto() {
         if ($this->balls) {
-            return $this->balls = "https://images-na.ssl-images-amazon.com/images/I/61YspBLkaqL._SX425_.jpg";
+            return $this->balls = "https://s17346.pcdn.co/wp-content/uploads/2018/01/funny-stress-balls.jpg";
         } else {
-            return $this->balls = "https://www.gophersport.com/cmsstatic/img/834/G-45570-RainbowStrikerRubberBowlingBalls-clean.jpg?medium";
+            return $this->balls = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJI5cGmzlsn0ZwBRi2hkTebZ4erDAF-llp6V04bdcFhkEkJHBr5w";
         }
     }
 
 }
 
-$name = new ThailandSurprise('miniskirt');
+$test = new ThailandSurprise('miniskirt', 'aloha');
+
+var_dump($test);
 
 ?>
 <html>
@@ -36,9 +40,10 @@ $name = new ThailandSurprise('miniskirt');
         <meta charset="UTF-8">
     </head>
     <body>
-        <img src="<?php print $name->getPhoto(); ?>"
+        <img src="<?php print $test->getPhoto(); ?>"
     </body>
 </html>
+
 
 
 
