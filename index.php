@@ -42,20 +42,48 @@ class FileDB {
     }
 
     public function createTable($table_name) {
-        if (!isset($this->data[$table_name])) {
+        if (!$this->tableExists($table_name)) {
             $this->data[$table_name] = [];
             return true;
         }
         return false;
     }
 
-    public function dropTable($table_name){
+    public function tableExists($table_name) {
+        if (!isset($this->data[$table_name])) {
+            return false;
+        }
+        return true;
+    }
+
+    public function dropTable($table_name) {
         unset($this->data[$table_name]);
     }
+
+    public function truncateTable($table_name) {
+        if ($this->tableExists($table_name)) {
+            $this->data[$table_name] = [];
+            return true;
+        }
+        return false;
+    }
+
+    public function insertRow($table_name, $row, $row_id = null) {
+        if ($this->tableExists($table_name)){
+            if ($row_id != null){
+                 $this->data[$table_name] = $row;
+                 return true;
+            }
+            return false;
+        }
+    }
+
 }
 
-$test = new FileDB('file.txt', 'as');
-
-$test->createTable('abc');
-$test->dropTable('abc');
-var_dump($test);
+//$test = new FileDB('file.txt');
+//
+//$test->createTable('abc');
+//$test->createTable('cba');
+////$test->dropTable('abc');
+//$test->truncateTable('abc');
+//var_dump($test);
