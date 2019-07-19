@@ -72,12 +72,12 @@ class FileDB {
         if ($this->tableExists($table_name)){
             if ($row_id != null){
                  $this->data[$table_name][$row_id] = $row;
-                 return true;
             } else {
                 $this->data[$table_name][] = $row;
             }
-            return false;
+            return true;
         }
+        return false;
     }
 
 }
