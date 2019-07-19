@@ -5,9 +5,8 @@ class FileDB {
     private $file_name;
     private $data;
 
-    public function __construct($file_name, $data) {
+    public function __construct($file_name) {
         $this->file_name = $file_name;
-        $this->data = $data;
     }
 
     public function load() {
@@ -43,16 +42,20 @@ class FileDB {
     }
 
     public function createTable($table_name) {
-        if ($table_name) {
-            return false;
-        } else {
-            $this->data = $table_name[];
+        if (!isset($this->data[$table_name])) {
+            $this->data[$table_name] = [];
             return true;
         }
+        return false;
     }
 
+    public function dropTable($table_name){
+        unset($this->data[$table_name]);
+    }
 }
 
+$test = new FileDB('file.txt', 'as');
 
-
-
+$test->createTable('abc');
+$test->dropTable('abc');
+var_dump($test);
