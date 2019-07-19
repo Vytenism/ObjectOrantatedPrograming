@@ -42,4 +42,17 @@ class FileDB {
         }
     }
 
+    public function createTable($table_name) {
+        if ($table_name) {
+            return false;
+        } else {
+            $this->data = $table_name[];
+            return true;
+        }
+    }
+
 }
+
+
+
+
