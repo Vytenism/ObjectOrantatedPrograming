@@ -69,15 +69,24 @@ class FileDB {
     }
 
     public function insertRow($table_name, $row, $row_id = null) {
-        if ($this->tableExists($table_name)){
-            if ($row_id != null){
-                 $this->data[$table_name][$row_id] = $row;
+        if ($this->tableExists($table_name)) {
+            if ($row_id !== null) {
+                $this->data[$table_name][$row_id] = $row;
             } else {
                 $this->data[$table_name][] = $row;
             }
+
             return true;
         }
+
         return false;
+    }
+
+    public function rowExists($table_name, $row_id) {
+        if (!isset($this->data[$table_name][$row_id])) {
+            return false;
+        }
+        return true;
     }
 
 }
@@ -85,8 +94,9 @@ class FileDB {
 $test = new FileDB('file.txt');
 
 $test->createTable('abc');
+$test->rowExists('abc', 'vb');
 //$test->createTable('cba');
 //$test->dropTable('abc');
 //$test->truncateTable('abc');
-$test->insertRow('abc', 'joo');
+//$test->insertRow('abc', 'joo');
 var_dump($test);
