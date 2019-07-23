@@ -5,10 +5,6 @@ declare (strict_type = 1);
 class Drink{
     
     private $data;
-    private $name;
-    private $amount_ml;
-    private $abarot;
-    private $image;
     
     public function __construct($data) {
         $this->data = $data;
