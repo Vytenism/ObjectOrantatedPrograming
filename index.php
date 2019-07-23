@@ -192,9 +192,27 @@ class FileDB {
      * @return type
      */
     public function getRow($table_name, $row_id) {
-        return $this->data[$table_name][$row_id];
+        if ($this->rowExists($table_name, $row_id)) {
+            return $this->data[$table_name][$row_id];
+        }
+
+        return false;
     }
-    
+    /**
+     * In DB search for data to compare for data you want to find
+     * @param type $table_name
+     * @param type $conditions
+     * @return boolean
+     */
+    public function getRowWhere($table_name, $conditions) {
+        if ($this->rowExists($table_name, $row_id)) {
+            foreach ($table_name as $row => $value) {
+                return $conditions === $this->data[$value];
+            }
+        }
+
+        return false;
+    }
 
 }
 
@@ -205,6 +223,7 @@ $test->insertRow('abc', 'vb');
 //$test->rowExists('abc', 'vb');
 //$test->rowInsertIfNotExists('abc', 'vb', 2);
 $test->updateRow('acb', 2, 'cb');
+
 //$test->createTable('cba');
 //$test->dropTable('abc');
 //$test->truncateTable('abc');
