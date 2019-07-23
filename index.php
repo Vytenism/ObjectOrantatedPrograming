@@ -173,10 +173,28 @@ class FileDB {
 
         return false;
     }
-    
-    public function deleteRow($table_name, $row_id){
-        unset($this->data[$table_name][$row_id]);
+
+    /**
+     * delete row from your database
+     * @param type $table_name
+     * @param type $row_id
+     */
+    public function deleteRow($table_name, $row_id) {
+        if ($this->rowExists($table_name, $row_id)) {
+            unset($this->data[$table_name][$row_id]);
+        }
     }
+
+    /**
+     * get information from data
+     * @param type $table_name
+     * @param type $row_id
+     * @return type
+     */
+    public function getRow($table_name, $row_id) {
+        return $this->data[$table_name][$row_id];
+    }
+
 }
 
 $test = new FileDB('file.txt');
