@@ -157,6 +157,7 @@ class FileDB {
 
         return false;
     }
+
     /**
      * updates a row with new information
      * @param type $table_name
@@ -166,10 +167,8 @@ class FileDB {
      */
     public function updateRow($table_name, $row_id, $row) {
         if ($this->rowExists($table_name, $row_id)) {
-            return $this->data[$table_name][$row_id] = $row;
+            $this->data[$table_name][$row_id] = $row;
         }
-
-        return false;
     }
 
 }
