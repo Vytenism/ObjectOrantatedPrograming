@@ -144,19 +144,32 @@ class FileDB {
     }
 
     /**
-     * 
+     * add to data a row which one belongs for table
      * @param type $table_name
      * @param type $row
      * @param type $row_id
      * @return boolean
      */
     public function rowInsertIfNotExists($table_name, $row, $row_id) {
-        if (isset($this->data[$table_name][$row_id])) {
-            return false;
-        } else {
-            $this->insertRow($table_name, $row, $row_id);
-            return true;
+        if (!$this->rowExists($table_name, $row_id)) {
+            return $this->insertRow($table_name, $row, $row_id);
         }
+
+        return false;
+    }
+    /**
+     * updates a row with new information
+     * @param type $table_name
+     * @param type $row_id
+     * @param type $row
+     * @return boolean
+     */
+    public function updateRow($table_name, $row_id, $row) {
+        if ($this->rowExists($table_name, $row_id)) {
+            return $this->data[$table_name][$row_id] = $row;
+        }
+
+        return false;
     }
 
 }
@@ -165,8 +178,9 @@ $test = new FileDB('file.txt');
 
 $test->createTable('abc');
 $test->insertRow('abc', 'vb');
-$test->rowExists('abc', 'vb');
-$test->rowInsertIfNotExists('abc', 'vb', 2);
+//$test->rowExists('abc', 'vb');
+//$test->rowInsertIfNotExists('abc', 'vb', 2);
+$test->updateRow('acb', 2, 'cb');
 //$test->createTable('cba');
 //$test->dropTable('abc');
 //$test->truncateTable('abc');
