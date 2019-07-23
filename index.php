@@ -168,9 +168,15 @@ class FileDB {
     public function updateRow($table_name, $row_id, $row) {
         if ($this->rowExists($table_name, $row_id)) {
             $this->data[$table_name][$row_id] = $row;
+            return true;
         }
-    }
 
+        return false;
+    }
+    
+    public function deleteRow($table_name, $row_id){
+        unset($this->data[$table_name][$row_id]);
+    }
 }
 
 $test = new FileDB('file.txt');
