@@ -1,5 +1,4 @@
 <?php
-
 require '../bootloader.php';
 
 $nav = [
@@ -8,34 +7,37 @@ $nav = [
     ]
 ];
 
+
+
+
 $db = new Core\FileDB(DB_FILE);
-$db->createTable('test_table');
-$db->insertRow('test_table', ['name' => 'Zebenkstis', 'balls' => true]);
-$db->insertRow('test_table', ['name' => 'Cytis Ritinas', 'balls' => false]);
-$db->updateRow('test_table', 1, ['name' => 'Rytis Citins', 'balls' => false]);
+$db->load();
+//$db->getData();
+$db->createTable('drinks');
+//$db->insertRow('drinks', $drink->getData());
+//$test = $db->getRowsWhere('drinks', ['abarot' => 40]);
+//var_dump($drinks);
+//var_dump($db);
+$drink = new App\Drinks\Drink([
+    'id' => 0,
+    'name' => 'viskis',
+    'amount_ml' => 700,
+    'abarot' => 41,
+    'image' => '.jpg']);
+$modelDrinks = new App\Drinks\Model();
+//$modelDrinks->insert('viskis');
+$drinks = $modelDrinks->get();
+//
+//$drinks = $modelDrinks->get(['abarot' => 40]);
+//var_dump($test);
 
-$db->rowInsertIfNotExists('test_table', 4, ['name' => 'Bubilius Kybys', 'balls' => true]);
+foreach ($drinks as $drink) {
+    var_dump($drink);
+//    $drink->setImage('https://dydza6t6xitx6.cloudfront.net/ci-angry-orchard-crisp-apple-cider-b7dc378f12558f5e.jpeg');
+//    $modelDrinks->update($drink);
+}
 
-var_dump('All database data:', $db->getData());
-
-$rows_with_balls = $db->getRowsWhere('test_table', ['balls' => true]);
-var_dump('Rows with balls:', $rows_with_balls);
-
-$drink = new App\Drinks\Drink();
-$drink->setName('mano neimas');
-$drink->setAmount(2);
-$drink->setAbarot(39.5);
-$drink->setImage('/img');
-$drink->setData([
-    'name' => 'Moscovskaja',
-    'amount_ml' => 3,
-    'abarot' => 40,
-    'askdf' => 'sdf',
-    'image' => 'IMGLINK'
-]);
-
-var_dump('Drink:', $drink);
-
+$dbarray = $db->getData();
 ?>
 <html>
     <head>
@@ -50,9 +52,25 @@ var_dump('Drink:', $drink);
     </head>
     <body>
         <?php require ROOT . '/app/templates/navigation.tpl.php'; ?>
-        
+
         <div class="content">
             <?php require ROOT . '/core/templates/form/form.tpl.php'; ?>
         </div>
+        <div class="middle">
+        <div>
+        <?php foreach ($dbarray['drinks'] as $drinks => $drink): ?>
+            <h1>
+                <?php print $drink['name']; ?>
+            </h1>
+            <img class="gerimas" src="<?php print $drink['image']; ?>" alt="logo">
+            <h2>
+                 <?php print $drink['amount_ml'] . 'ml'; ?>
+            </h2>
+              <h2>
+                 <?php print $drink['abarot'] . '%'; ?>
+            </h2>
+        <?php endforeach; ?>
+        </div>
+            </div>
     </body>
 </html>

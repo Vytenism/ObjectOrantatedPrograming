@@ -179,3 +179,12 @@ body {
 div.active a {
 	/*color: black;*/
 }
+
+.gerimas {
+    width: 100px;
+}
+
+.middle {
+    margin: 0 auto;
+    width: 500px;
+}

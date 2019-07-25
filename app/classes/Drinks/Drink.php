@@ -11,6 +11,7 @@ class Drink {
             $this->setData($data);
         } else {
             $this->data = [
+                'id' => null,
                 'name' => null,
                 'amount_ml' => null,
                 'abarot' => null,
@@ -26,11 +27,13 @@ class Drink {
     public function setData($array) {
         if(isset($array['id'])){
             $this->setId($array['id']);
+        } else {
+            $this->data['id'] = null;
         }
-        $this->setName($array['name']) ?? null;
-        $this->setAmount($array['amount_ml']) ?? null;
-        $this->setAbarot($array['abarot']) ?? null;
-        $this->setImage($array['image']) ?? null;
+        $this->setName($array['name'] ?? null);
+        $this->setAmount($array['amount_ml'] ?? null);
+        $this->setAbarot($array['abarot'] ?? null);
+        $this->setImage($array['image'] ?? null);
     }
 
     /**
@@ -39,6 +42,7 @@ class Drink {
      */
     public function getData() {
         return [
+            'id' => $this->getId(),
             'name' => $this->getName(),
             'amount_ml' => $this->getAmount(),
             'abarot' => $this->getAbarot(),

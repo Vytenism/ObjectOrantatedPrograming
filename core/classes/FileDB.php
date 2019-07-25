@@ -220,11 +220,14 @@ class FileDB {
             }
 
             if ($condition_met) {
-                $rows[] = $row;
+                $rows[$row_id] = $row;
             }
         }
 
         return $rows;
     }
-
+    
+    public function __destruct() {
+        $this->save();
+    }
 }
